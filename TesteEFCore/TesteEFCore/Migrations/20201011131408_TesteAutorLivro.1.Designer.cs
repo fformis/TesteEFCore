@@ -3,51 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TesteEFCore;
 
 namespace TesteEFCore.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20201011131408_TesteAutorLivro.1")]
+    partial class TesteAutorLivro1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("TesteEFCore.Aluno", b =>
-                {
-                    b.Property<int>("AlunoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AlunoId");
-
-                    b.ToTable("Alunos");
-                });
-
-            modelBuilder.Entity("TesteEFCore.AlunoCurso", b =>
-                {
-                    b.Property<int>("AlunoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CursoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("AlunoId", "CursoId");
-
-                    b.HasIndex("CursoId");
-
-                    b.ToTable("AlunosCursos");
-                });
 
             modelBuilder.Entity("TesteEFCore.Autor", b =>
                 {
@@ -62,21 +34,6 @@ namespace TesteEFCore.Migrations
                     b.HasKey("AutorId");
 
                     b.ToTable("Autores");
-                });
-
-            modelBuilder.Entity("TesteEFCore.Curso", b =>
-                {
-                    b.Property<int>("CursoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CursoId");
-
-                    b.ToTable("Cursos");
                 });
 
             modelBuilder.Entity("TesteEFCore.Livro", b =>
@@ -115,21 +72,6 @@ namespace TesteEFCore.Migrations
                     b.HasKey("ProdutoId");
 
                     b.ToTable("Produtos");
-                });
-
-            modelBuilder.Entity("TesteEFCore.AlunoCurso", b =>
-                {
-                    b.HasOne("TesteEFCore.Aluno", "Aluno")
-                        .WithMany("AlunoCursos")
-                        .HasForeignKey("AlunoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TesteEFCore.Curso", "Curso")
-                        .WithMany("AlunoCursos")
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("TesteEFCore.Livro", b =>
